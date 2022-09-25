@@ -1,7 +1,7 @@
 import React from "react";
-import {View, Text, StyleSheet, Button} from "react-native";
+import {View, Text, StyleSheet, Button, TouchableOpacity} from "react-native";
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
     const username = "Ali"
     return(
         <View style = {styles.viewStyle}>
@@ -11,9 +11,12 @@ const HomeScreen = () => {
             <Button 
                 title="Go To List Screen"
                 onPress={() => {
-                    console.log("Button Pressed!")
+                   props.navigation.navigate("List")
                 }}
             />
+            <TouchableOpacity onPress={() => {props.navigation.navigate("List")}}>
+                <Text>TouchableOpacity Button!</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -48,4 +51,15 @@ export default HomeScreen;
     TouchableOpacity --> This can be used to detect press on any element, very customizable
     Button is self closing so it will be like <Button />
     When assigning value to title in Button we do NOT need {}
+
+    TouchableOpacity is NOT self-closing!
+
+    Having StackNavigatior show the page will pass props to the page which is a navigation obj. This obj can help us with many actions.
+    The object passed is named props and it has one field named navigation. This field has the obj we are looking for!
+    Navigate key in the navigation obj has a value which is a func that can change the content visible on the screen.
+    If we pass the name of a route (page) to this func that page will show up
+    But we HAVE to include the name of the route in the navigator in App.js
+    React Navigator will automatically add a back button to return to the previous page! How convenient!!!
+
+    We can use { navigation } instead of props in the input of func to just get the navigation element!
 */
