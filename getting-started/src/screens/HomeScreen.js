@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, Button} from "react-native";
 
 const HomeScreen = () => {
     const username = "Ali"
@@ -8,6 +8,12 @@ const HomeScreen = () => {
             <Text style = {styles.textStyle}>
                 Hello {username}!
             </Text>
+            <Button 
+                title="Go To List Screen"
+                onPress={() => {
+                    console.log("Button Pressed!")
+                }}
+            />
         </View>
     );
 }
@@ -32,4 +38,14 @@ export default HomeScreen;
     2. The main func that shows the component
     3. Styles which is like css
     4. export which will allow us to use this file in other parts of our project. Like in App.js!
+
+    View type is used to wrap multiple elements in it. It's something like div in HTML!
+    We can only return one element in our func
+    So, if we want to show multiple elements we can wrap it in a view and return the signle view element
+
+    Native has 2 ways of implementing buttons:
+    Button --> primitive type, just understands press, used for simple interactions
+    TouchableOpacity --> This can be used to detect press on any element, very customizable
+    Button is self closing so it will be like <Button />
+    When assigning value to title in Button we do NOT need {}
 */
