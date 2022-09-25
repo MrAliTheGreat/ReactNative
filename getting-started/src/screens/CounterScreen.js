@@ -43,5 +43,11 @@ export default CounterScreen;
     var will be changed over time! Everytime we want to change var we can NOT change it directly!
     So for example no var++ instead setVar(var + 1)!
     setVar is a func and when we want to change var we will call it with the new value for var
-    Any time we call setVar react will automatically rerun our entire main func! But var value will be updated
+    Any time we call setVar react will automatically rerun our ENTIRE main func! But var value will be updated
+
+    React knows if a component has already been rendered and if it has been rendered useState will not initialize the var again!
+    The Update of our var with setVar will happen with a brief pause!
+    So, if you use console.log immediately after useState, var can still be the previous value
+
+    If we use reusable components ans have a state var in them, each of the components will have their own unique state var! Cool!!!
 */
