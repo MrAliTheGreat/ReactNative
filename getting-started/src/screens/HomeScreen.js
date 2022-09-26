@@ -37,7 +37,13 @@ const HomeScreen = (props) => {
                 onPress={() => {
                    props.navigation.navigate("Square")
                 }}
-            />                           
+            />
+            <Button 
+                title="Go To Text Screen"
+                onPress={() => {
+                   props.navigation.navigate("Text")
+                }}
+            />
         </View>
     );
 }
