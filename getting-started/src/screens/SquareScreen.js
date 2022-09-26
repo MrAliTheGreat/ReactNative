@@ -83,7 +83,7 @@ export default SquareScreen;
     Like we can say in the action obj to change a specific state var by some specific amount
     reducer function has to always return a value that can be used as state vars!
     So, basically, reducer is like setVar in useState! Well dispatch is to be exact!!!
-    dispatch is basically runMyReducer! Whenever we want to change our state vars we must use dispatch and pass action!
+    dispatch is basically runMyReducer! Whenever we want to change our state vars we must use dispatch and ONLY pass action!
 
     {...state, red: state.red + action.amount} means get a copy of all elements of state and put it in a new obj
     Then change the value of red to state.red + action.amount
