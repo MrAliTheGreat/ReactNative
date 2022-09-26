@@ -1,61 +1,63 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import ColorCounter from "../components/ColorCounter";
 
-const SquareScreen = () => {
-    const [red, setRed] = useState(0)
-    const [green, setGreen] = useState(0)
-    const [blue, setBlue] = useState(0)
-
-    const setColor = (color, change) =>{
-        if(color === "red"){
-            red + change > 255 || red + change < 0 ? null : setRed(red + change)
-            return
-        }
-        if(color === "green"){
-            green + change > 255 || green + change < 0 ? null : setGreen(green + change)
-            return
-        }
-        if(color === "blue"){
-            blue + change > 255 || blue + change < 0 ? null : setBlue(blue + change)
-        }
-        return
+const reducer = (state, action) => {
+    if(action.type === "change_red"){
+        return (state.red + action.payload > 255 || state.red + action.payload < 0)
+        ? state
+        : {...state, red: state.red + action.payload} 
     }
+    if(action.type === "change_green"){
+        return (state.green + action.payload > 255 || state.green + action.payload < 0)
+        ? state
+        : {...state, green: state.green + action.payload}
+    }
+    if(action.type === "change_blue"){
+        return (state.blue + action.payload > 255 || state.blue + action.payload < 0)
+        ? state
+        : {...state, blue: state.blue + action.payload} 
+    }
+    return state    
+}
+
+const SquareScreen = () => {
+    const [state, dispatch] = useReducer(reducer, {red: 0, green: 0, blue: 0})
 
     return(
         <View>
             <ColorCounter 
                 colorName="Red"
                 onIncrease={() => {
-                    setColor("red", 15)
+                    dispatch({type: "change_red", payload: 15})
                 }}
                 onDecrease={() => {
-                    setColor("red", -15)
+                    dispatch({type: "change_red", payload: -15})
                 }}
             />
             <ColorCounter 
                 colorName="Green"
                 onIncrease={() => {
-                    setColor("green", 15)
+                    dispatch({type: "change_green", payload: 15})
                 }}
                 onDecrease={() => {
-                    setColor("green", -15)
+                    dispatch({type: "change_green", payload: -15})
                 }}
             />
             <ColorCounter 
                 colorName="Blue"
                 onIncrease={() => {
-                    setColor("blue", 15)
+                    dispatch({type: "change_blue", payload: 15})
                 }}
                 onDecrease={() => {
-                    setColor("blue", -15)
+                    dispatch({type: "change_blue", payload: -15})
                 }}
             />
             <View 
                 style={{
                     height: 150,
                     width: Dimensions.get("window").width,
-                    backgroundColor:`rgb(${red}, ${green}, ${blue})` 
+                    backgroundColor:`rgb(${state.red}, ${state.green}, ${state.blue})` 
                 }}
             />
         </View>
@@ -76,4 +78,17 @@ export default SquareScreen;
     For managing state we can either use Reducer or useState
     For using Reducer we must have multiple closely-related state vars and also know exactly how they will change
 
+    It is better to declare reducer function outside of the main func!
+    action var in reducer function is the way we want to change the state vars
+    Like we can say in the action obj to change a specific state var by some specific amount
+    reducer function has to always return a value that can be used as state vars!
+    So, basically, reducer is like setVar in useState! Well dispatch is to be exact!!!
+    dispatch is basically runMyReducer! Whenever we want to change our state vars we must use dispatch and pass action!
+
+    {...state, red: state.red + action.amount} means get a copy of all elements of state and put it in a new obj
+    Then change the value of red to state.red + action.amount
+    
+    The names that developers use are as follows:
+    For action, the state var we want to change is the following key value --> type: "change_stateVarName"
+                the amount we want to change is the following key value    --> payload: amountOfChange
 */
