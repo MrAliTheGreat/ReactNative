@@ -1,33 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../component/SearchBar";
-import yelp from "../api/yelp";
+import useResults from "../hooks/useResults";
 
 const SearchScreen = () => {
     const [searchText, setSearchText] = useState("")
-    const [searchResults, setSearchResults] = useState([])
-    const [errorMessage, setErrorMessage] = useState("")
-
-    const searchAPI = async (searchTerm) => {
-        try{
-            const response = await yelp.get("/search", {
-                params: {
-                    term: searchTerm,
-                    limit: 50,
-                    location: "Bloomington"
-                }
-            })
-            setSearchResults(response.data.businesses)
-        } catch(err){
-            setErrorMessage("Something Went Wrong! :(")
-        }
-    }
-
-    // This will execute on screen start up. So, we will have some results when we open up the screen instead of just a blank screen!
-    useEffect(() => {
-        searchAPI("Food")
-    }, [])
-
+    const [searchAPI, searchResults, errorMessage] = useResults()
     return(
         <View>
             <SearchBar
@@ -65,4 +43,6 @@ export default SearchScreen;
     useEffect(() => {})          --> This will run the given func EVERY TIME the component is rendered! a big no no!!!
     useEffect(() => {}, [])      --> This will run the given func ONLY when the component is FIRST rendered. What we want!
     useEffect(() => {}, [value]) --> This will run the given func ONLY when the component is FIRST rendered AND when the value changes! Cool!!!
+
+    We have to extract logic from react component!
 */
