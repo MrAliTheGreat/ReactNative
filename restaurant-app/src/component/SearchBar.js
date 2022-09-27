@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-import { View, Image, StyleSheet, TextInput } from "react-native";
+import React from "react";
+import { View, StyleSheet, TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons"
 
-const SearchBar = () => {
-    const [searchText, setSearchText] = useState("")
-
+const SearchBar = ({ searchText, onChange, onSubmit }) => {
     return(
         <View style={styles.view}>
-            {/* This is what I initially wrote!
-            <Image
-                style={styles.searchImage} 
-                source={require("../../assets/search.png")}
-            /> */}
             <Feather 
                 name="search"
                 style={styles.FeatherIcon}
@@ -22,9 +15,8 @@ const SearchBar = () => {
                 autoCorrect={false}
                 placeholder="Search"
                 value={searchText}
-                onChangeText={(newText) => {
-                    setSearchText(newText)
-                }}
+                onChangeText={onChange}
+                onEndEditing={onSubmit}
             />
         </View>
     )
@@ -43,14 +35,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
     },
-    // searchImage: {
-    //     width: 35,
-    //     height: 35,
-    //     marginVertical: 3,
-    //     marginLeft: 7
-    // }
     FeatherIcon: {
-        fontSize: 25, // Equivalent to size={25} in JSX above!
+        fontSize: 25,
         marginVertical: 3,
         marginLeft: 5,
         alignSelf: "center"
@@ -72,4 +58,10 @@ export default SearchBar;
     Putting alignItems center on parent will limit the size for textInput!
     It is better to never use alignItem center on the parent of TextInput!
     If we want to center other siblings of TextInput we can simply use alignSelf center for them instead!
+
+    onEndEditing is a prop and it will execute when the user is done with inputting! Like, when pressing enter on keyboard or go on phone!
+
+    Whenever we want to do something from parents side in the child we have to use CALLBACKS!
+
+    For props, instead of using () => {funcName()} we can simply write funcName! Both of them are func declarations so it works!
 */
