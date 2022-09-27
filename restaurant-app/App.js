@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import SearchScreen from "./src/screens/SearchScreen";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const navigator = createStackNavigator({
+  Search: SearchScreen
+}, {
+  initialRouteName: "Search",
+  defaultNavigationOptions: {
+    title: "Business Search"
+  }
 });
+
+export default createAppContainer(navigator);
+
+/*
+  Native has different navigation tools:
+  StackNavigator: Different screens, button in one page to navigate to the other
+  BottomTabNavigator: Options available at the bottom of screen to move to a new screen
+  DrawerNavigator: Like 3 lines! When we tap it a new drawer will pop out from left or right of the screen.
+  .                Then we can navigate to a new screen!
+
+  defaultNavigationOptions is the default option that will be used for each screen
+  Like, with this we can customize the header showed on top of different screens (title)
+
+  When we run the project, the export at the end of App.js will be used to show a starting screen!
+  We have to export a react component from App.js
+  By using createAppContainer and passing navigator to it the navigator will turn into a react component!
+  So, this way, the content of navigator can be displayed on the starting screen!
+*/
