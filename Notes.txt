@@ -8,4 +8,4 @@
 7. If you want to add a module that is not currently in dependencies of package.json you can use the command "npm install moduleName --save"
 8. If your WiFi does not connect to the Internet then you have to give higher priority to WiFi than LAN. This can be done by going to "change adapter setting" and in IPv4 in advanced section and changing the metric to a low number like 1 that has the highest priority.
 9. Create-expo-app will create a git repo. So a repo in your general repo won't work. Git considers it as a submodule and so it won't add or track the files for it. You can remove the .git file then add all the files and it'll be OK. Also if it doesn't work running "git rm --cached folderName" can help to remove the cache and not consider the folder a git repo anymore.
-10. "npx expo-cli init projectName --npm" --> Main way to create a new native project!
+10. "npx expo-cli init projectName --npm" --> Main way to create a new native project! This will also not create .git so deleting the .git file is not necessary! Nice!!!
