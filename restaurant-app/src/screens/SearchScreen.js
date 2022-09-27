@@ -1,20 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, {useState } from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SearchBar from "../component/SearchBar";
 import useResults from "../hooks/useResults";
+import ResultsList from "../component/ResultsList";
 
 const SearchScreen = () => {
     const [searchText, setSearchText] = useState("")
     const [searchAPI, searchResults, errorMessage] = useResults()
+    
+    const filterResultsByPrice = (price) => {
+        return searchResults.filter((result) => {
+            return result.price === price
+        })
+    }
+
     return(
-        <View>
+        <View style={{ flex: 1}}>
             <SearchBar
                 searchText={searchText} 
                 onChange={setSearchText}
                 onSubmit={() => {searchAPI(searchText)}}
             />
-        <Text>Number of search results: {searchResults.length}</Text>
-        {errorMessage ? <Text>{errorMessage}</Text> : null}
+            {
+                errorMessage
+                ? <Text>{errorMessage}</Text> 
+                :
+                <ScrollView>
+                    <ResultsList title="Cost Effective" results={filterResultsByPrice("$")} />
+                    <ResultsList title="Bit Pricer" results={filterResultsByPrice("$$")} />
+                    <ResultsList title="Big Spender" results={filterResultsByPrice("$$$")} />
+                    <ResultsList title="Mamma Mia!" results={filterResultsByPrice("$$$$")} />
+                </ScrollView>
+            }
         </View>
     )
 }

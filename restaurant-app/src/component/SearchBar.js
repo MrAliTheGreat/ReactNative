@@ -25,7 +25,9 @@ const SearchBar = ({ searchText, onChange, onSubmit }) => {
 const styles = StyleSheet.create({
     view: {
         backgroundColor: "lightgrey",
-        margin: 20,
+        marginHorizontal: 20,
+        marginTop: 15,
+        marginBottom: 5,
         flexDirection: "row",
         borderRadius: 10,
     },
@@ -34,11 +36,12 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 20,
         fontWeight: "bold",
+        height: 50
     },
     FeatherIcon: {
         fontSize: 25,
         marginVertical: 3,
-        marginLeft: 5,
+        marginLeft: 10,
         alignSelf: "center"
     }
 });

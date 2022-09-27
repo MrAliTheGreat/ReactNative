@@ -21,7 +21,7 @@ export default () => {
     }
 
     useEffect(() => {
-        searchAPI("Food")
+        searchAPI("Pizza")
     }, [])
     
     return [searchAPI, searchResults, errorMessage]
