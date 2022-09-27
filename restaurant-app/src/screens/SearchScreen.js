@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../component/SearchBar";
 import yelp from "../api/yelp";
@@ -22,6 +22,11 @@ const SearchScreen = () => {
             setErrorMessage("Something Went Wrong! :(")
         }
     }
+
+    // This will execute on screen start up. So, we will have some results when we open up the screen instead of just a blank screen!
+    useEffect(() => {
+        searchAPI("Food")
+    }, [])
 
     return(
         <View>
@@ -55,4 +60,9 @@ export default SearchScreen;
     Showing an error message to user means updating the screen and that means rerendering. State Var Baby!!!
 
     We NEVER call a function directly inside of our react component (main func) because it can cause an inifinite loop! (Problem I had in IE, Talked with Taha)
+
+    useEffect is a hook that allows us to run some code just one time when our component is first rendered to the screen!
+    useEffect(() => {})          --> This will run the given func EVERY TIME the component is rendered! a big no no!!!
+    useEffect(() => {}, [])      --> This will run the given func ONLY when the component is FIRST rendered. What we want!
+    useEffect(() => {}, [value]) --> This will run the given func ONLY when the component is FIRST rendered AND when the value changes! Cool!!!
 */
