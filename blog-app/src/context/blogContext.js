@@ -1,16 +1,16 @@
 import React from "react";
 
-const blogContext = React.createContext();
+const BlogContext = React.createContext();
 
-export const blogProvider = ({ children }) => {
+export const BlogProvider = ({ children }) => {
     return(
-        <blogContext.Provider value={"Well, Hello There!"}>
+        <BlogContext.Provider value={"Well, Hello There!"}>
             {children}
-        </blogContext.Provider>
+        </BlogContext.Provider>
     )
 }
 
-export default blogContext;
+export default BlogContext;
 
 /*
     Context is like a pipe! It's responsible for direct communication of provider with nested childs!
@@ -19,5 +19,8 @@ export default blogContext;
     The prop is named children!
 
     We can have many exports in one file but only one can be default! That is the one the file will be known with!
-    When just export is used when importing we have to use {}! 
+    When just export is used when importing we have to use {}!
+
+    IMPORTANT!!!
+    Apparantly context var and anything related to it must be captalized or else errors will occur! Really Weird!
 */

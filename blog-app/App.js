@@ -3,7 +3,7 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 import indexScreen from "./src/screens/indexScreen";
-import { blogProvider } from "./src/context/blogContext";
+import { BlogProvider } from "./src/context/BlogContext";
 
 const navigator = createStackNavigator({
     index: indexScreen
@@ -22,9 +22,9 @@ export default () => {
   return(
     // Here <App /> will be passed as children prop to blogProvider!
     // This way <App /> which is all of our program (react stack navigator) is wrapped in a provder! Genius!!!
-    <blogProvider>
+    <BlogProvider>
       <App />
-    </blogProvider>
+    </BlogProvider>
   )
 }
 
