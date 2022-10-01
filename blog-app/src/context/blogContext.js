@@ -4,11 +4,13 @@ const blogContext = React.createContext();
 
 export const blogProvider = ({ children }) => {
     return(
-        <blogContext.Provider>
+        <blogContext.Provider value={"Well, Hello There!"}>
             {children}
         </blogContext.Provider>
     )
 }
+
+export default blogContext;
 
 /*
     Context is like a pipe! It's responsible for direct communication of provider with nested childs!
