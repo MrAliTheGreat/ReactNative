@@ -15,7 +15,7 @@ const SearchScreen = () => {
     }
 
     return(
-        <View style={{ flex: 1}}>
+        <>
             <SearchBar
                 searchText={searchText} 
                 onChange={setSearchText}
@@ -32,7 +32,7 @@ const SearchScreen = () => {
                     <ResultsList title="Mamma Mia!" results={filterResultsByPrice("$$$$")} />
                 </ScrollView>
             }
-        </View>
+        </>
     )
 }
 
@@ -62,4 +62,11 @@ export default SearchScreen;
     useEffect(() => {}, [value]) --> This will run the given func ONLY when the component is FIRST rendered AND when the value changes! Cool!!!
 
     We have to extract logic from react component!
+
+    For making a ScrollView visible we have to add flex: 1 to the most parent view
+    This way native will only use the screen as its visible rendering space not as much space as it wants!
+    Usually setting flex: 1 to the most parent view can solve problems related to content cutting off!
+    Instead of this method we can simply remove view and just set <> and </>!!!
+    By doing this the problem with view won't happen! Like content will NOT go off screen!
+    We use <> </> any time we need to return multiple different elements whenever using a view would harm our layout overall!
 */
