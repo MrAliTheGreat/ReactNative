@@ -1,6 +1,5 @@
 import React, {useReducer} from "react";
-
-const BlogContext = React.createContext();
+import createDataContext from "./createDataContext";
 
 const blogReducer = (state, action) => {
     if(action.type === "add_blogpost"){
@@ -9,21 +8,13 @@ const blogReducer = (state, action) => {
     return state
 }
 
-export const BlogProvider = ({ children }) => {
-    const [blogPosts, dispatch] = useReducer(blogReducer, [])
-
-    const addBlogPost = () => {
+const addBlogPost = (dispatch) => {
+    return () => {
         dispatch({type: "add_blogpost"})
     }
-
-    return(
-        <BlogContext.Provider value={{ data: blogPosts, addBlogPost: addBlogPost }}>
-            {children}
-        </BlogContext.Provider>
-    )
 }
 
-export default BlogContext;
+export const {Context, Provider} = createDataContext(blogReducer, {addBlogPost}, []);
 
 /*
     Context is like a pipe! It's responsible for direct communication of provider with nested childs!
@@ -40,4 +31,9 @@ export default BlogContext;
     Apparantly context var and anything related to it must be captalized or else errors will occur! Really Weird!
 
     If the provider has a state var and this state var updates the WHOLE app will rerender since everything is wrapped in provider!
+
+    We can have multiple resources in our app! Each time creating a new context is repetitive
+    So, we can just declare the reducer and helper action funcs and state initial value and use a reusable context component to make everything work without any duplication!
+
+    dispatch is declared in createDataContext so for accessing dispatch we are using callbacks! That is the reason for returning a func in addBlogPost!
 */
