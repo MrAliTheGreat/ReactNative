@@ -1,33 +1,63 @@
 import React, {useContext} from "react";
-import { View, Text, StyleSheet, FlatList, Button } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from "react-native";
 
-import {Context as BlogContext} from "../context/BlogContext";
+import { Context as BlogContext } from "../context/BlogContext";
+import { AntDesign } from "@expo/vector-icons" 
 
 const indexScreen = () => {
-    const { state, addBlogPost } = useContext(BlogContext)
+    const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext)
 
     return(
-        <View>
+        <>
             <Button 
                 title="Add Blog Post"
                 onPress={addBlogPost}
             />
             <FlatList 
-                keyExtractor={(post) => post.title}
+                keyExtractor={(post) => post.id}
                 data={state}
                 renderItem={({ item }) => {
                     return(
-                        <Text>
-                            {item.title}
-                        </Text>
+                        <View style={styles.elementView}>
+                            <Text style={styles.title}>
+                                {item.title}
+                            </Text>
+                            <TouchableOpacity onPress={() => {deleteBlogPost(item.id)}}>
+                                <AntDesign 
+                                    name="delete"
+                                    color={"red"}
+                                    style={styles.delete}
+                                />
+                            </TouchableOpacity>
+                        </View>
                     )
                 }}
             />
-        </View>
+        </>
     )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    elementView: {
+        marginHorizontal: 20,
+        marginVertical: 5,
+        padding: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderColor: "lightgrey",
+        borderWidth: 3,
+        borderRadius: 10,
+        backgroundColor: "#420420"
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "white"
+    },
+    delete: {
+        fontSize: 30
+    }
+});
 
 export default indexScreen;
 
