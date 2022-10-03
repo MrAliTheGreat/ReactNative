@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from "reac
 import { Context as BlogContext } from "../context/BlogContext";
 import { AntDesign } from "@expo/vector-icons" 
 
-const indexScreen = () => {
+const indexScreen = ({ navigation }) => {
     const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext)
 
     return(
@@ -18,18 +18,20 @@ const indexScreen = () => {
                 data={state}
                 renderItem={({ item }) => {
                     return(
-                        <View style={styles.elementView}>
-                            <Text style={styles.title}>
-                                {item.title}
-                            </Text>
-                            <TouchableOpacity onPress={() => {deleteBlogPost(item.id)}}>
-                                <AntDesign 
-                                    name="delete"
-                                    color={"red"}
-                                    style={styles.delete}
-                                />
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity onPress={() => {navigation.navigate("show", {id: item.id})}}>
+                            <View style={styles.elementView}>
+                                <Text style={styles.title}>
+                                    {item.title}
+                                </Text>
+                                <TouchableOpacity onPress={() => {deleteBlogPost(item.id)}}>
+                                    <AntDesign 
+                                        name="delete"
+                                        color={"red"}
+                                        style={styles.delete}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </TouchableOpacity>
                     )
                 }}
             />
@@ -47,7 +49,11 @@ const styles = StyleSheet.create({
         borderColor: "lightgrey",
         borderWidth: 3,
         borderRadius: 10,
-        backgroundColor: "#420420"
+        backgroundColor: "#420420",
+        shadowColor: "black",
+        shadowOffset: {width: -2, height: 2},
+        shadowOpacity: 0.5,
+        shadowRadius: 5
     },
     title: {
         fontSize: 30,
