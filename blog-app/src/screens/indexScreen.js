@@ -9,10 +9,10 @@ const indexScreen = ({ navigation }) => {
 
     return(
         <>
-            <Button 
+            {/* <Button 
                 title="Add Blog Post"
                 onPress={addBlogPost}
-            />
+            /> */}
             <FlatList 
                 keyExtractor={(post) => post.id}
                 data={state}
@@ -37,6 +37,22 @@ const indexScreen = ({ navigation }) => {
             />
         </>
     )
+}
+
+indexScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: () => {
+            return(
+                <TouchableOpacity onPress={() => {navigation.navigate("create")}}>
+                    <AntDesign 
+                        name={"plus"}
+                        style={{fontSize: 30, marginRight: 10}}
+                        color={"blue"}
+                    />
+                </TouchableOpacity>
+            )
+        }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -73,4 +89,11 @@ export default indexScreen;
     Context is like a channel or a pipe that passes the data
     Provider is like the root of data where the data is generated
     If we want to connect to this system and get our required data we have to use useContext hook. useContext is like a mean of connection!
+
+    Whenever our screen is going to be rendered by react navigator the func that we declared in .navigateOptions will be executed automatically!
+    With this function we can for example control the header and what happens in it!
+    In the option we return, headerRight is one option we can set up
+    We can assign a react component to headerRight and the element will be rendered on the right side of the header each time the screen is rendered! Cool!!!
+
+    navigationOptions will have navigation obj as a prop! How convenient!
 */

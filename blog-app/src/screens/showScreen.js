@@ -11,8 +11,9 @@ const showScreen = ({ navigation }) => {
     })
 
     return(
-        <View>
-            <Text>{blogPost.title}</Text>
+        <View style={{alignItems: "center"}}>
+            <Text style={{fontSize: 30, marginTop: 10}}>{blogPost.title}</Text>
+            <Text style={{fontSize: 20, marginVertical: 100}}>{blogPost.content}</Text>
         </View>
     )
 }
