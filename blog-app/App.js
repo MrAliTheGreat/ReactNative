@@ -5,13 +5,15 @@ import { createStackNavigator } from "react-navigation-stack";
 import indexScreen from "./src/screens/indexScreen";
 import showScreen from "./src/screens/showScreen";
 import createScreen from "./src/screens/createScreen";
+import editScreen from "./src/screens/editScreen";
 
 import { Provider as BlogProvider } from "./src/context/BlogContext";
 
 const navigator = createStackNavigator({
     index: indexScreen,
     show: showScreen,
-    create: createScreen
+    create: createScreen,
+    edit: editScreen
   },
   {
     initialRouteName: "index",

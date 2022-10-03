@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 
 import { Context as BlogContext } from "../context/BlogContext";
 import { AntDesign } from "@expo/vector-icons" 
@@ -9,10 +9,6 @@ const indexScreen = ({ navigation }) => {
 
     return(
         <>
-            {/* <Button 
-                title="Add Blog Post"
-                onPress={addBlogPost}
-            /> */}
             <FlatList 
                 keyExtractor={(post) => post.id}
                 data={state}
