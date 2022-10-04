@@ -1,5 +1,5 @@
-import React, {useReducer} from "react";
 import createDataContext from "./createDataContext";
+import jsonServer from "../api/jsonServer";
 
 const blogReducer = (state, action) => {
     if(action.type === "add_blogpost"){
@@ -21,12 +21,16 @@ const blogReducer = (state, action) => {
             : blogPost
         })
     }
+    if(action.type === "get_blogposts"){
+        return action.payload
+    }
     return state
 }
 
 const addBlogPost = (dispatch) => {
-    return (title, content, navCallback) => {
-        dispatch({type: "add_blogpost", payload: {title, content}})
+    return async (title, content, navCallback) => {
+        await jsonServer.post("/blogposts", {title, content})
+        // dispatch({type: "add_blogpost", payload: {title, content}})
         if(navCallback){
             navCallback()
         }
@@ -48,12 +52,20 @@ const editBlogPost = (dispatch) => {
     }
 }
 
+const getBlogPosts = (dispatch) => {
+    return async () => {
+        const res = await jsonServer.get("/blogposts")
+        dispatch({type: "get_blogposts", payload: res.data})
+    }
+}
+
 export const {Context, Provider} = createDataContext(
     blogReducer,
     {
         addBlogPost,
         deleteBlogPost,
-        editBlogPost
+        editBlogPost,
+        getBlogPosts
     },
     [] 
 );
@@ -80,4 +92,7 @@ export const {Context, Provider} = createDataContext(
     dispatch is declared in createDataContext so for accessing dispatch we are using callbacks! That is the reason for returning a func in addBlogPost!
 
     map will create a new array and put the elements mentioned in the callback in each slot!
+
+    When we call post, the new element will be automatically added to the records!
+    Like here when post is called with a new blogpost obj the list in db will change and the blogpost will be addded to the list!
 */

@@ -1,0 +1,17 @@
+Using npm init will give us a package.json file. Then we can install different modules using npm install as before.
+For creating a server on localhost we can use json-server module.
+First, we have create a db.json file which will hold our data. It's the db!
+Then we have run the server! For that we have to define a script that can be run using "npm run".
+The script can be seen in package.json script under db! ("json-server --watch db.json")
+When "npm run db" is executed in terminal this will start a server on localhost port 3000.
+If the port is in use we can use -p to specify a port number!
+
+ngrok is a cool tool to be honest! It will forward our server to another server that can be access from anywhere!
+Like it will forward localhost to some other server that has a specific URL and can be accessed from any place!
+This forwarding will happen for 8 hours and whenever we restart another 8 hours will be placed! Just the URL for the remote server will change!
+For running this tunnel we can use "ngrok http 3000" script in the script section of package.json and run "npm run tunnel" in the terminal.
+I wanted to do localhost so I didn't try this out!
+Important: "json-server --watch db.json" will run the server on localhost(127.0.0.1:3000)
+           If we want to run server on our local IP then we have to find the pc's ip via ipconfig and then add host param to the command as below:
+           "json-server --host 192.168.1.1 --watch db.json" --> WiFi
+           "json-server --host 172.20.10.1 --watch db.json" --> LAN
