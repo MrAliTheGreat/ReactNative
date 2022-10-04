@@ -47,4 +47,11 @@ export default () => {
   Context is here to solve this very issue!
   Context is used for moving info from a parent to some NESTED child! Directly!
 
+  When we have number of contexts then we can wrap the context with other contexts for example if we have ImageContext below will be returned:
+    <BlogProvider>
+      <ImageProvier>
+        <App />
+      </ImageProvier>
+    </BlogProvider>
+  The order of context in wrapping does NOT matter! ImageProvider can come on top or below BlogProvider!
 */

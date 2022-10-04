@@ -1,19 +1,9 @@
 {
   "blogposts": [
     {
-      "id": 1,
-      "title": "Ali spotted downtown!",
-      "content": "I never thought this day would come XD"
-    },
-    {
-      "title": "Second post",
-      "content": "We are doomed!",
-      "id": 2
-    },
-    {
-      "title": "Third post of mine!",
-      "content": "lol just kidding!!!",
-      "id": 3
+      "title": "Git add *.go",
+      "content": "Git commit -m “Add go files”",
+      "id": 1
     }
   ]
 }
