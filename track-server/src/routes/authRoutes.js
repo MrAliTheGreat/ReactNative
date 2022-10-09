@@ -8,13 +8,17 @@ const router = express.Router()
 router.post("/signup", async (req, res) => {
     const {email, password} = req.body
 
-    const user = new User({
-        email,
-        password
-    })
-    await user.save()
+    try{
+        const user = new User({
+            email,
+            password
+        })
+        await user.save()
 
-    res.send("You have made a post request!")
+        res.send("You have made a post request!")
+    }catch(err){
+        return res.status(422).send(err.message)
+    }
 })
 
 module.exports = router
@@ -33,4 +37,6 @@ module.exports = router
 
     user.save will add the new user to DB. It is an async command!
     By default a new db will be created by the name of test and our record will be added to a collection named users!
+
+    422 status code is for sending invalid data!
 */

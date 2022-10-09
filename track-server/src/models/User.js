@@ -25,4 +25,10 @@ mongoose.model("User", userSchema)
     For referencing the model in other files we can directly access DB and get our model!
 
     By creating the model, mongoose will automatically create the collection in the DB!
+
+    Providing unique and required in the fields will help our handlings since mongoose will do it automatically!
+    When we try to add a duplicate user (uniqure) or add an empty user (required) mongoose will say bro this is wrong do it right!
+    So, it will return an error and we can simply just by error handling get what we want!
+    We don't need to like query for a user and if it is in the DB then we print a failed message, this will be done by mongoose!
+    We just get the error and print the message! This whole process will happen by mongoose when we try to .save() a user!
 */
