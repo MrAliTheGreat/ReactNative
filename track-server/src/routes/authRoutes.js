@@ -3,6 +3,7 @@ const express = require("express")
 const router = express.Router()
 
 router.post("/signup", (req, res) => {
+    console.log(req.body.email)
     res.send("You have made a post request!")
 })
 
@@ -15,4 +16,6 @@ module.exports = router
     and finally put it all together with app in index.js!
 
     "module.exports = router" will export router so that we can use it in other files
+
+    We have to set Content-Type to application/json in header of post request so that the API understands that it got a JSON!
 */

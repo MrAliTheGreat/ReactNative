@@ -2,9 +2,11 @@ const dotenv = require("dotenv")
 dotenv.config("../.env")
 const express = require("express")
 const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
 const authRoutes = require("./routes/authRoutes")
 
 const app = express()
+app.use(bodyParser.json())
 app.use(authRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
@@ -41,4 +43,10 @@ app.listen(3000, () => {
 
     JWT proves that the current user is the user with the mentioned email and password in login!
     For future requests the logged in user has to provide his/her JWT with the request!
+
+    For post requests, the values will be in JSON format but express doesn't know how to handle JSON.
+    So, for JSON handling we will use body-parser!
+    By using "bodyParser.json()" in app, everything will first go through it which means all JSON values will be parsed
+    then the request will go through authRoutes with JSON values parsed! It's like a pipeline!
+    These parsed values can be found in req.body value of route handler!
 */
