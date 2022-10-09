@@ -1,9 +1,19 @@
 const express = require("express")
+const mongoose = require("mongoose")
+
+const User = mongoose.model("User")
 
 const router = express.Router()
 
-router.post("/signup", (req, res) => {
-    console.log(req.body.email)
+router.post("/signup", async (req, res) => {
+    const {email, password} = req.body
+
+    const user = new User({
+        email,
+        password
+    })
+    await user.save()
+
     res.send("You have made a post request!")
 })
 
@@ -18,4 +28,9 @@ module.exports = router
     "module.exports = router" will export router so that we can use it in other files
 
     We have to set Content-Type to application/json in header of post request so that the API understands that it got a JSON!
+
+    By using the User obj we can query or manipulate the data in our collection on the DB!
+
+    user.save will add the new user to DB. It is an async command!
+    By default a new db will be created by the name of test and our record will be added to a collection named users!
 */

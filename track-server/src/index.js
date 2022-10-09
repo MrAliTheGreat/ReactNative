@@ -1,3 +1,4 @@
+require("./models/User")
 const dotenv = require("dotenv")
 dotenv.config("../.env")
 const express = require("express")
