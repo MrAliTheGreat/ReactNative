@@ -31,4 +31,9 @@ app.listen(3000, () => {
     When we want to run the server we will simply run "node src/index.js" in terminal
 
     For mongoURI we have to add our username and password to the connection string.
+
+    Restarting the server each time when there is change is a bit dull!
+    nodemon will watch our project directory and whenever a change happens in our project, it will automatically restart the server for us.
+    By running the server using nodemon, instead of node, in the script section of package.json we can have the functionality mentioned above!
+    This time we can use "npm run dev" in terminal instead of "node src/index.js"!
 */
