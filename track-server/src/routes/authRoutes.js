@@ -1,5 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
+require("dotenv").config("../.env")
 
 const User = mongoose.model("User")
 
@@ -15,7 +17,13 @@ router.post("/signup", async (req, res) => {
         })
         await user.save()
 
-        res.send("You have made a post request!")
+        const token = jwt.sign({
+            userID: user._id
+        }, process.env.JWT_KEY)
+
+        res.send({
+            token
+        })
     }catch(err){
         return res.status(422).send(err.message)
     }
@@ -39,4 +47,6 @@ module.exports = router
     By default a new db will be created by the name of test and our record will be added to a collection named users!
 
     422 status code is for sending invalid data!
+
+    For signing via JWT we can use jwt.sign() and pass the obj we want to encrypt with the private key!
 */
