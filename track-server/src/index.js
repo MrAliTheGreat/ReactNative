@@ -56,5 +56,11 @@ app.listen(3000, () => {
     This way after the execution of the middleware, if there is NOT any error the handler func will be executed!
     But if there is an error the error will be shown and the handler func will NOT execute!
 
-    Since user was added to req in the requireAuth middleware, we can now access it in the handler func via req.user! 
+    Since user was added to req in the requireAuth middleware, we can now access it in the handler func via req.user!
+
+    Storing plaintext password is dumb we can use hashing! Just using hash is not enough since we can get hit by a dictionary attack
+    What we can do is to use salt when hashing. Salt is a random and UNIQUE string that will be added to the password before hashing
+    Salt will make the same password have different hash since salt in unique each time
+    Salt will be seen as plaintext in DB so the only good thing that salt does is that it will make attacker's dictionary much larger!
+    Since the attacker has to create the whole dictionary everytime for each salt, making it computationally hard to get all passwords!
 */

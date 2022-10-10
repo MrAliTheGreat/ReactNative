@@ -29,6 +29,25 @@ router.post("/signup", async (req, res) => {
     }
 })
 
+router.post("/signin", async(req, res) => {
+    const { email, password } = req.body
+    if(!email || !password){
+        return res.status(422).send({ error: "You must provide email and password!" })
+    }
+
+    const user = await User.findOne({ email })
+    if(!user){
+        return res.status(422).send({ error: "Invalid email or password!" })
+    }
+    try{
+        await user.comparePasswords(password)
+        const token = jwt.sign({ userID: user._id }, process.env.JWT_KEY)
+        res.send({ token })
+    } catch(err){
+        return res.status(422).send({ error: "Invalid email or password!" })
+    }
+})
+
 module.exports = router
 
 /*
@@ -49,4 +68,7 @@ module.exports = router
     422 status code is for sending invalid data!
 
     For signing via JWT we can use jwt.sign() and pass the obj we want to encrypt with the private key!
+
+    When handling a promise we have to use try catch statement. If promise was reject the catch part will execute
+    But if promise was resolved then it will continue!
 */
