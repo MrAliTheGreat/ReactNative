@@ -33,5 +33,7 @@ mongoose.model("Track", trackSchema)
     default is for setting the default value of field and is used when nothing is provided!
 
     Since point schema doesn't have a meaning without track schema we do NOT define it in another file
-    point is pointless without track and there is no separate use for it in our case 
+    point is pointless without track and there is no separate use for it in our case
+
+    Whenever we create a new schema a _id will be assigned to that obj!
 */
