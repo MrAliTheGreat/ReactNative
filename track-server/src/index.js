@@ -5,6 +5,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const authRoutes = require("./routes/authRoutes")
+const requireAuth = require("./middlewares/requireAuth")
 
 const app = express()
 app.use(bodyParser.json())
@@ -21,8 +22,8 @@ mongoose.connection.on("error", (err) => {
 })
 
 
-app.get("/", (_, res) => {
-    res.send("Well Hello There!")
+app.get("/", requireAuth , (req, res) => {
+    res.send(`Email: ${req.user.email}, Password: ${req.user.password}`)
 })
 
 app.listen(3000, () => {
@@ -50,4 +51,10 @@ app.listen(3000, () => {
     By using "bodyParser.json()" in app, everything will first go through it which means all JSON values will be parsed
     then the request will go through authRoutes with JSON values parsed! It's like a pipeline!
     These parsed values can be found in req.body value of route handler!
+
+    Middlewares for route handlers can be added as the second argument!
+    This way after the execution of the middleware, if there is NOT any error the handler func will be executed!
+    But if there is an error the error will be shown and the handler func will NOT execute!
+
+    Since user was added to req in the requireAuth middleware, we can now access it in the handler func via req.user! 
 */
