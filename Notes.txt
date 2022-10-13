@@ -12,3 +12,4 @@
 11. Installing a dependency requires the server to be stopped! This is because the app needs to be built again so that the new changes can take place!
 12. For setting up env vars, after creating .env file we need to install react-native-dotenv and add "plugins: [["module:react-native-dotenv"]]" to return statement of babel.config.js file. Then in each file by adding "import { envVarName } from "@env" " we can simply get our env vars.
 13. Setting up env vars for a normal node project is easier. First, we have to install dotenv. Then we can import dotenv into our file via "const dotenv = require("dotenv")". Then we have to set the path to .env file via "dotenv.config("Path To .env File")". The we can simply have access to env var via "process.env.ENV_VAR".
+14. Moving a folder from another repo to your own repo will add new contributers! For removing it we can create a new branch add all the code to it!
